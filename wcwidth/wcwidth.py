@@ -299,7 +299,9 @@ def _wcmatch_version(given_version):
     _return_str = not _PY3 and isinstance(given_version, str)
 
     if _return_str:
-        unicode_versions = [ucs.encode() for ucs in list_versions()]
+        # avoid list-comprehension to work around a coverage issue:
+        # https://github.com/nedbat/coveragepy/issues/753
+        unicode_versions = list(map(lambda ucs: ucs.encode(), list_versions()))
     else:
         unicode_versions = list_versions()
     latest_version = unicode_versions[-1]
