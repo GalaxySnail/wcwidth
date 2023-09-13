@@ -48,6 +48,7 @@ jobs:
           cache: pip
 
       - name: Prepare tox
+        shell: bash
         run: |
           V=${{ matrix.python-version }}
           V=py$(echo $V | tr -d .)
@@ -58,7 +59,8 @@ jobs:
 
       - run: python -Im tox -e ${{ env.TOX_PYTHON }}
 
-      - run: test -f .coverage && mv .coverage{,.${{ env.TOX_PYTHON }}.$(date +"%Y-%m-%d_%H%M%S")}
+      - shell: bash
+        run: if test -f .coverage; then mv .coverage{,.${{ env.TOX_PYTHON }}.$(date +"%Y-%m-%d_%H%M%S")}; fi
 
       - name: Upload coverage data
         uses: actions/upload-artifact@v3
