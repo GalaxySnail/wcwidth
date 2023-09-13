@@ -375,4 +375,4 @@ def _wcmatch_version(given_version):
         # is, 4.1 is returned for given 4.9.9, where 4.1 and 5.0 are available.
         if cmp_next_version > cmp_given:
             return unicode_version
-    assert False, ("Code path unreachable", given_version, unicode_versions)
+    assert False, ("Code path unreachable", given_version, unicode_versions)  # pragma: no cover
