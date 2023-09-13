@@ -55,6 +55,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
           cache: pip
+        if: '! matrix.container'
 
       - name: Prepare tox
         shell: bash
