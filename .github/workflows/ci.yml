@@ -65,9 +65,20 @@ jobs:
 
           echo TOX_PYTHON=$V >>$GITHUB_ENV
 
-          python -Im pip install tox
+          if test ${{ matrix.python-version }} = "2.7"; then
+            python -m pip install tox
+          else
+            python -Im pip install tox
+          fi
 
-      - run: python -Im tox -e ${{ env.TOX_PYTHON }}
+      - name: Run tests
+        shell: bash
+        run: |
+          if test ${{ matrix.python-version }} = "2.7"; then
+            python -m tox -e ${{ env.TOX_PYTHON }}
+          else
+            python -Im tox -e ${{ env.TOX_PYTHON }}
+          fi
 
       - name: Rename coverage data
         shell: bash
