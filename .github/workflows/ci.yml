@@ -60,7 +60,10 @@ jobs:
       - run: python -Im tox -e ${{ env.TOX_PYTHON }}
 
       - shell: bash
-        run: if test -f .coverage; then mv .coverage{,.${{ env.TOX_PYTHON }}.$(date +"%Y-%m-%d_%H%M%S")}; fi
+        run: |
+          if test -f .coverage; then
+            mv .coverage{,.${{ matrix.os }}.${{ env.TOX_PYTHON }}.$(date +"%Y-%m-%d_%H%M%S")}
+          fi
 
       - name: Upload coverage data
         uses: actions/upload-artifact@v3
