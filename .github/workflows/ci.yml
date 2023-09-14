@@ -76,7 +76,7 @@ jobs:
           echo IS_PYPY=$IS_PYPY >>$GITHUB_ENV
           echo TOX_PYTHON=$V >>$GITHUB_ENV
 
-          if test ${{ matrix.python-version }} = "2.7"; then
+          if [[ ${{ matrix.python-version }} = *2.7 ]]; then
             python -m pip install tox
           else
             python -Im pip install tox
@@ -85,7 +85,7 @@ jobs:
       - name: Run tests
         shell: bash
         run: |
-          if test ${{ matrix.python-version }} = "2.7"; then
+          if [[ ${{ matrix.python-version }} = *2.7 ]]; then
             python -m tox -e ${{ env.TOX_PYTHON }}
           else
             python -Im tox -e ${{ env.TOX_PYTHON }}
