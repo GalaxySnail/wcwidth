@@ -66,7 +66,7 @@ jobs:
           V=${{ matrix.python-version }}
 
           if [[ "$V" = pypy-* ]]; then
-            V=pypy3
+            V=$(echo $V | tr -d .-)
             IS_PYPY=1
           else
             V=py$(echo $V | tr -d .)
