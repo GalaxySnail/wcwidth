@@ -21,7 +21,7 @@ def run_aria2(path, args):
 
 
 def main():
-    versions = update_tables.get_unicode_versions()
+    versions = update_tables.fetch_unicode_versions()
     aria2_txt_list = []
     aria2_txt_path = os.path.join(update_tables.PATH_DATA, "aria2input.txt")
 
